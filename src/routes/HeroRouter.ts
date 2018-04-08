@@ -1,5 +1,9 @@
 import { Router, Request, Response, NextFunction } from 'express'
-const Heroes = require('../data')
+const heroes = [
+  { id: 0, name: 'a' },
+  { id: 1, name: 'b' },
+  { id: 2, name: 'c' }
+]
 
 export class HeroRouter {
   router: Router
@@ -16,15 +20,15 @@ export class HeroRouter {
    * GET all Heroes.
    */
   public getAll (req: Request, res: Response, next: NextFunction) {
-    res.send(Heroes)
+    res.send(heroes)
   }
 
   /**
    * GET one hero by id
    */
   public getOne (req: Request, res: Response, next: NextFunction) {
-    let query = parseInt(req.params.id, 10)
-    let hero = Heroes.find(hero => hero.id === query)
+    const query = parseInt(req.params.id, 10)
+    const hero = heroes.find(hero => hero.id === query)
     if (hero) {
       res.status(200)
         .send({

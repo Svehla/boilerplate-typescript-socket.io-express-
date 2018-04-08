@@ -1,18 +1,19 @@
 {
-  "name": "typescript-node-api",
-  "version": "1.0.1",
+  "name": "faceup-node-api",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon dist/index.js",
+    "start": "nodemon --inspect dist/index.js",
     "compile": "gulp",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'",
     "build": "gulp scripts",
     "lint": "tslint --project tsconfig.json \"src/**/*.ts\" ",
-    "lint:fix": "tslint --fix --project tsconfig.json \"src/**/*.ts\" "
+    "lint:fix": "tslint --fix --project tsconfig.json \"src/**/*.ts\" ",
+    "setup:env": "node setup"
   },
   "keywords": [],
-  "author": "",
+  "author": "face-up technology",
   "license": "ISC",
   "devDependencies": {
     "@types/body-parser": "0.0.33",
@@ -37,6 +38,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "debug": "^2.2.0",
+    "dotenv": "^5.0.1",
     "express": "^4.14.0",
     "morgan": "^1.7.0"
   }
