@@ -4,7 +4,7 @@ export interface Socket<OnData, EmitData> {
 }
 
 export type AppData = {
-  allSockets: Socket<any, any>[] // Array<Socket<*, *>>
+  allSockets: Socket<any, any>[]
 }
 // TODO: add enum for name of
 export type SocketName = 'foo1'

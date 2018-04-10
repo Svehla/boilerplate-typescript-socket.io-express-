@@ -4,7 +4,7 @@ type Handler = {
   [key: string]: (param: any) => void
 }
 // TODO: use class or curry fn?
-const foo = (app, socket): Handler => ({
+const foo = (app: AppData, socket: Socket<any, any>): Handler => ({
   foo1: foo1(app, socket),
   foo2: foo2(app, socket)
 })
