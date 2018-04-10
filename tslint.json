@@ -1,6 +1,8 @@
 {
   "extends": "tslint-config-standard",
   "rules": {
-    "no-use-before-declare": false
+    "no-use-before-declare": false,
+    "max-line-length": [true, 80],
+    "typedef": [true]
   }
 }

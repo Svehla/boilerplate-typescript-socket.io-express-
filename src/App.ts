@@ -25,9 +25,9 @@ class App {
 
   // Configure API endpoints.
   private routes (): void {
-    let router = express.Router()
+    let router: express.Router = express.Router()
     // placeholder route handler
-    router.get('/', (req, res, next) => {
+    router.get('/', (req: express.Request, res: express.Response) => {
       res.json({
         message: 'Hello World!'
       })
