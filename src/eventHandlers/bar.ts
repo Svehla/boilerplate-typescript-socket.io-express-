@@ -10,7 +10,7 @@ const bar = (app, socket) => {
 const bar1 = (app, socket) => (data) => {
   // Broadcast message to all sockets
   console.log('bar1', data)
-})
+}
 
 const bar2 = (app, socket) => (data) => {
   // Reply to sender
@@ -19,6 +19,6 @@ const bar2 = (app, socket) => (data) => {
   app.allSockets.forEach(soc => {
     soc.emit('bar3', data)
   })
-})
+}
 
 export default bar

@@ -1,23 +1,34 @@
-const foo = (app, socket) => {
-  const handler = {
-    foo1: foo1(app, socket),
-    foo2: foo2(app, socket)
-  }
-  return handler
-}
+import { Socket, AppData } from './socketTypes'
 
-// Events
-const foo1 = (app, socket) => (data) => {
-  console.log('foo1', data)
+type Handler = {
+  [key: string]: (param: any) => void
+}
+// TODO: use class or curry fn?
+const foo = (app, socket): Handler => ({
+  foo1: foo1(app, socket),
+  foo2: foo2(app, socket)
 })
 
-const foo2 = (app, socket) => (data) => {
+// Events
+type Foo1Data = {}
+type Foo1 = (app: AppData, socket: Socket<Foo1Data, {}>) => (
+  data: Foo1Data
+) => void
+const foo1: Foo1 = (app, socket) => (data) => {
+  console.log('foo1', data)
+}
+
+type Foo2Data = {}
+type Foo2 = (app: AppData, socket: Socket<Foo1Data, {}>) => (
+  data: Foo2Data
+) => void
+const foo2: Foo2 = (app, socket) => (data) => {
   // Reply to sender
   console.log('foo2', data)
   socket.emit('foo3', data)
   app.allSockets.forEach(soc => {
     soc.emit('foo3', data)
   })
-})
+}
 
 export default foo
