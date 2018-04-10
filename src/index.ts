@@ -3,7 +3,7 @@ import * as debug from 'debug'
 const socketIoInit = require('socket.io')
 import App from './App'
 import { normalizePort } from './utils'
-import socketIoHandlers from './eventHandlers/index'
+import socketIoHandlers from './eventHandlers/eventHandlers'
 const packageJson = require('../package.json')
 require('dotenv').load()
 debug('ts-express:server')

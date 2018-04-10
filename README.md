@@ -26,6 +26,9 @@ After that fill variables located in .env file.
 [debug to console](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27)
 TODO: refresh of console
 
+### Good tool for testing socket.io interface
+[debug sockets to console](http://amritb.github.io/socketio-client-tool/)
+
 ## REST-API / Socket DOCS
 [apiary](https://apiary.io/)
 
