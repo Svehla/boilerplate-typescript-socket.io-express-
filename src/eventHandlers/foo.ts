@@ -3,10 +3,11 @@ import { Socket, AppData } from './socketTypes'
 type Handler = {
   [key: string]: (param: any) => void
 }
+type PossibleData = Foo1Data
+  | Foo2Data
 // TODO: use class or curry fn?
-const foo = (app: AppData, socket: Socket<any, any>): Handler => ({
-  foo1: foo1(app, socket),
-  foo2: foo2(app, socket)
+const foo = (app: AppData, socket: Socket<{}, PossibleData>): Handler => ({
+  foo1: foo1(app, socket), foo2: foo2(app, socket)
 })
 
 // Events
@@ -19,7 +20,7 @@ const foo1: Foo1 = (app, socket) => (data) => {
 }
 
 type Foo2Data = {}
-type Foo2 = (app: AppData, socket: Socket<Foo1Data, {}>) => (
+type Foo2 = (app: AppData, socket: Socket<Foo2Data, {}>) => (
   data: Foo2Data
 ) => void
 const foo2: Foo2 = (app, socket) => (data) => {

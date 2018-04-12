@@ -1,7 +1,11 @@
 import * as express from 'express'
 import * as logger from 'morgan'
 import * as bodyParser from 'body-parser'
+import * as cors from 'cors'
+import * as bearerToken from 'express-bearer-token'
 import HeroRouter from './routes/HeroRouter'
+import AuthenticateRouter from './routes/AuthenticateRouter'
+import authMiddleware from './authMiddleware'
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -18,6 +22,9 @@ class App {
 
   // Configure Express middleware.
   private middleware (): void {
+    // enable cross domain
+    this.express.use(cors())
+    this.express.use(bearerToken())
     this.express.use(logger('dev'))
     this.express.use(bodyParser.json())
     this.express.use(bodyParser.urlencoded({ extended: false }))
@@ -33,7 +40,8 @@ class App {
       })
     })
     this.express.use('/', router)
-    this.express.use('/api/v1/heroes', HeroRouter)
+    this.express.use('/api/heroes', [authMiddleware], HeroRouter)
+    this.express.use('/api/authenticate', AuthenticateRouter)
   }
 
 }

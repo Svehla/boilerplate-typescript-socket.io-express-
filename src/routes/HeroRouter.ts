@@ -20,7 +20,11 @@ export class HeroRouter {
    * GET all Heroes.
    */
   public getAll (req: Request, res: Response, next: NextFunction) {
+    // check header or url parameters or post parameters for token
+
     res.send(heroes)
+    // const verify = verifyJWTToken(userJWT)
+    // console.log(verify)
   }
 
   /**
@@ -60,4 +64,4 @@ export class HeroRouter {
 const heroRoutes = new HeroRouter()
 heroRoutes.init()
 
-export default heroRoutes.router
+export default (heroRoutes.router)
