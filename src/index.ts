@@ -7,7 +7,6 @@ import socketIoHandlers from './eventHandlers/eventHandlers'
 const packageJson = require('../package.json')
 require('dotenv').load()
 debug('ts-express:server')
-console.log(socketIoHandlers)
 
 const onError = (error: NodeJS.ErrnoException): void => {
   if (error.syscall !== 'listen') throw error

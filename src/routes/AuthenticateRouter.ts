@@ -1,13 +1,11 @@
 import { Router, Request, Response, NextFunction } from 'express'
-import { createJWTToken } from '../auth'
-/*
-const users = {
-  users: [
-    { id: 0, name: 'Me', password: '1234' }
-  ]
+import { createJWTToken } from '../auth/authUtils'
+import data from '../data'
+
+type ReqBody = {
+  email: string,
+  password: string
 }
-*/
-console.log(process.env.JWT_SECRET)
 
 export class Authenticate {
   router: Router
@@ -24,9 +22,21 @@ export class Authenticate {
    * POST all authenticate
    */
   public authenticate (req: Request, res: Response, next: NextFunction) {
-    const { username } = req.body
-    const jwt = createJWTToken(username)
-    res.send({ jwt })
+    const { email, password }: ReqBody = req.body
+    const user = data.users.find(user => user.email === email)
+    if (user) {
+      if (password === user.password) {
+        const jwt = createJWTToken({
+          email,
+          id: user.id
+        })
+        res.send({ jwt })
+      } else {
+        res.status(401).send('Password is not correct')
+      }
+    } else {
+      res.status(401).send('User name does not exist')
+    }
   }
 
   /**

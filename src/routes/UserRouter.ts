@@ -1,15 +1,18 @@
 import { Router, Request, Response, NextFunction } from 'express'
-const heroes = [
-  { id: 0, name: 'a' },
-  { id: 1, name: 'b' },
-  { id: 2, name: 'c' }
-]
+import data from '../data'
+import { EnhanceRequest } from '../types/http'
 
-export class HeroRouter {
+const NO_USER_WITH_ID = 'No user found with the given id.'
+
+const users = data.users
+/*
+ * private router -> only for logged user
+ */
+export class UserRouter {
   router: Router
 
   /**
-   * Initialize the HeroRouter
+   * Initialize the UserRouter
    */
   constructor () {
     this.router = Router()
@@ -17,33 +20,30 @@ export class HeroRouter {
   }
 
   /**
-   * GET all Heroes.
+   * GET all users.
    */
-  public getAll (req: Request, res: Response, next: NextFunction) {
+  public getAll (req: EnhanceRequest, res: Response, next: NextFunction) {
     // check header or url parameters or post parameters for token
-
-    res.send(heroes)
-    // const verify = verifyJWTToken(userJWT)
-    // console.log(verify)
+    res.send(users)
   }
 
   /**
-   * GET one hero by id
+   * GET one user by id
    */
   public getOne (req: Request, res: Response, next: NextFunction) {
     const query = parseInt(req.params.id, 10)
-    const hero = heroes.find(hero => hero.id === query)
-    if (hero) {
+    const user = users.find(user => user.id === query)
+    if (user) {
       res.status(200)
         .send({
           message: 'Success',
           status: res.status,
-          hero
+          user
         })
     } else {
       res.status(404)
         .send({
-          message: 'No hero found with the given id.',
+          message: NO_USER_WITH_ID,
           status: res.status
         })
     }
@@ -60,8 +60,8 @@ export class HeroRouter {
 
 }
 
-// Create the HeroRouter, and export its configured Express.Router
-const heroRoutes = new HeroRouter()
-heroRoutes.init()
+// Create the UserRoutes, and export its configured Express.Router
+const userRoutes = new UserRouter()
+userRoutes.init()
 
-export default (heroRoutes.router)
+export default (userRoutes.router)

@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon dist/index.js",
+    "start": "gulp",
     "compile": "gulp",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'",
-    "build": "gulp scripts",
+    "build": "gulp compileScripts",
     "lint": "tslint --project tsconfig.json \"src/**/*.ts\" ",
     "lint:fix": "tslint --fix --project tsconfig.json \"src/**/*.ts\" ",
     "setup:env": "node setup"
@@ -29,7 +29,6 @@
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.1",
     "mocha": "^3.1.2",
-    "nodemon": "^1.17.3",
     "ts-node": "^3.3.0",
     "tslint": "^5.9.1",
     "tslint-config-standard": "^7.0.0",
@@ -42,6 +41,7 @@
     "dotenv": "^5.0.1",
     "express": "^4.14.0",
     "express-bearer-token": "^2.1.1",
+    "gulp-nodemon": "^2.2.1",
     "jsonwebtoken": "^8.2.1",
     "morgan": "^1.7.0",
     "socket.io": "^2.1.0"
